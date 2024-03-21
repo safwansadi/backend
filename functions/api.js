@@ -8,6 +8,7 @@ const error = require("../middleware/error");
 const multer = require("multer");
 const { addAnimal } = require("../controllers/animalController");
 const { Animal } = require("../models/amimal");
+const { Category, validate } = require("../models/category");
 
 const {mongoURI} = require("../config");
 const mongoose = require('mongoose');
@@ -15,9 +16,7 @@ const mongoose = require('mongoose');
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
-  
-
-
+    
 const app = express(); 
 
 app.use(express.static(path.join(__dirname, "uploads")));
@@ -49,6 +48,27 @@ router.get("/animal", async (req, res) => {
   }
   const animal = await Animal.find(query);
   res.send(animal);
+});
+
+router.post("/category", async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const category = new Category({
+   name:req.body.name
+  });
+  await category.save();
+
+  res.send(category);
+});
+
+router.get("/category", async (req, res) => {
+  try {
+    const category = await Category.find();
+    res.send(category);
+  } catch (ex) {
+    res.status(500).send("internal server error");
+  }
 });
 
 app.use("/animal", animal);

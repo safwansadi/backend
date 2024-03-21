@@ -1,9 +1,9 @@
-const { Animal, validate } = require("../models/amimal");
+const { Animal, validateAnimal } = require("../models/amimal");
 const { Category } = require("../models/category")
 const { imageUrl } = require("../config");
 
 exports.addAnimal = async (req, res) => {
-  const { error } = validate(req.body);
+  const { error } = validateAnimal(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const { name, categoryId } = req.body;

@@ -7,7 +7,6 @@ const animalSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     minlength: 3,
     maxlength: 50,
   },
@@ -32,4 +31,4 @@ const Animal = mongoose.model("Animal", animalSchema);
 
 exports.animalSchema = animalSchema;
 exports.Animal = Animal;
-exports.validate = validateAnimal;
+exports.validateAnimal = validateAnimal;
