@@ -13,13 +13,12 @@ app.use(express.static(path.join(__dirname, "uploads")));
 router.get("/",(req, res)=>{
   res.send("app is running...")
 });
-
-// Mount router at the specified base path
-app.use('/.netlify/functions/api', router);
-
 app.use(express.json());
 app.use("/animal", animal);
 app.use("/category", category);
 app.use(error);
+
+// Mount router at the specified base path
+app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);
