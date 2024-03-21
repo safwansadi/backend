@@ -7,7 +7,7 @@ const { Animal } = require("../models/amimal");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(path.dirname(__dirname), "./uploads"));
+      cb(null, path.join(path.dirname(__dirname), "./public"));
     },
     filename: function(req, file, cb) {
         // Generate a unique ID for the file name

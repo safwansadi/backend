@@ -3,7 +3,7 @@ const path = require("path");
 const {PORT} = require('./config');
 
 const app = express();
-app.use(express.static(path.join(__dirname, "uploads")));
+app.use(express.static(path.join(__dirname, "public")));
 
 require("./startup/routes")(app);
 require("./startup/db")();
