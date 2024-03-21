@@ -12,6 +12,6 @@ require("../startup/db")();
 
 const router = express.Router();
 
-app.use('/.netlify/functions/server', router);
+app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);
