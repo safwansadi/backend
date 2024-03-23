@@ -19,7 +19,6 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     
 const app = express(); 
 
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
 router.get("/",(req, res)=>{
@@ -27,19 +26,14 @@ router.get("/",(req, res)=>{
 });
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(path.dirname(__dirname), "./public"));
-  },
   filename: function(req, file, cb) {
-      // Generate a unique ID for the file name
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, uniqueSuffix + path.extname(file.originalname));
+      cb(null, file.originalname);
   }
 });
 
 const upload = multer({ storage: storage });
 
-router.post("/animal", upload.single("image"), addAnimal);
+router.post("/animal", upload.single("image"), addAnimalCloudinary);
 
 router.get("/animal", async (req, res) => {
   let query = {};

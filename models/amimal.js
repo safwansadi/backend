@@ -14,13 +14,13 @@ const animalSchema = new mongoose.Schema({
     type: categorySchema,
     required: true,
   },
-  image: { type: String, required: true } 
+  imageUrl: { type: String, required: true } 
 });
 
 function validateAnimal(Animal) {
   const schema = Joi.object({
     name: Joi.string().min(3).max(50).required(),
-    image: Joi.any().allow(null),
+    imageUrl: Joi.any().allow(null),
     categoryId:Joi.objectId().required(),
   });
 

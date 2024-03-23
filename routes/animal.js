@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const multer = require("multer");
-const { addAnimal } = require("../controllers/animalController");
+const { addAnimal, addAnimalCloudinary } = require("../controllers/animalController");
 const router = express.Router();
 const { Animal } = require("../models/amimal");
 
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage: storage });
   
-  router.post("/", upload.single("image"), addAnimal);
+  router.post("/", upload.single("image"), addAnimalCloudinary);
   
   router.get("/", async (req, res) => {
     let query = {};
