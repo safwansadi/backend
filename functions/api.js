@@ -6,7 +6,7 @@ const animal = require("../routes/animal");
 const category = require("../routes/category");
 const error = require("../middleware/error");
 const multer = require("multer");
-const { addAnimal } = require("../controllers/animalController");
+const { addAnimalCloudinary } = require("../controllers/animalController");
 const { Animal } = require("../models/amimal");
 const { Category, validate } = require("../models/category");
 
